@@ -8,7 +8,7 @@ router.route("/").get(controller.list).all(methodNotAllowed);
 
 router.route("/:movieId").get(controller.read).all(methodNotAllowed);
 
-router.use("/:movieId/reviews", controller.read, reviewsRouter);
+router.use("/:movieId/reviews", controller.movieExists, reviewsRouter);
 
 router.use("/:movieId/theaters", controller.movieExists, theatersRouter);
 

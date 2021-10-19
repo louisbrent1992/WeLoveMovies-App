@@ -1,4 +1,12 @@
+const { c } = require("tar");
 const knex = require("../db/connection");
+const reduceProperties = require("../utils/reduce-properties");
+
+const reduceCritic = reduceProperties("review_id", {
+  preferred_name: ["critic", null, "preferred_name"],
+  surname: ["critic", null, "surname"],
+  organization_name: ["critic", null, "organization_name"],
+});
 
 function create(review) {
   return knex("reviews")
@@ -7,8 +15,23 @@ function create(review) {
     .then((createdRecords) => createdRecords[0]);
 }
 
+function list() {
+  return knex("reviews as r")
+    .join("movies as m", "r.movie_id", "m.movie_id")
+    .join("critics as c", "c.critic_id", "r.critic_id")
+    .select("r.*", "c.*")
+    .then((data) => reduceCritic(data));
+}
+
 function read(review_id) {
   return knex("reviews").select("*").where({ review_id }).first();
+}
+
+function readCritic(review_id) {
+  return knex("reviews as r")
+    .join("critics as c", "r.critic_id", "c.critic_id")
+    .select("*")
+    .where({ review_id });
 }
 
 function update(updatedReview) {
@@ -16,7 +39,12 @@ function update(updatedReview) {
     .select("*")
     .where({ review_id: updatedReview.review_id })
     .update(updatedReview, "*")
-    .then((updatedRecords) => updatedRecords[0])
+    .then(() => readCritic(updatedReview.review_id))
+    .then((data) => reduceCritic(data)[0])
+    .then((review) => {
+      review.critic = review.critic[0];
+      return review;
+    });
 }
 
 function destroy(review_id) {
@@ -28,4 +56,5 @@ module.exports = {
   read,
   update,
   delete: destroy,
+  list,
 };
