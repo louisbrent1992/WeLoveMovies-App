@@ -13,6 +13,11 @@ async function reviewExists(req, res, next) {
   });
 }
 
+async function read(req, res, next) {
+    const data = await reviewsService.read();
+    res.json({ data });
+}
+
 async function create(req, res) {
   const data = await reviewsService.create(req.body.data);
   res.status(201).json({ data });
@@ -35,6 +40,8 @@ async function destroy(req, res) {
 
 module.exports = {
   create: asyncErrorBoundary(create),
+  read: [asyncErrorBoundary(reviewExists),asyncErrorBoundary(read)],
   update: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(update)],
   delete: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(destroy)],
+  reviewExists,
 };
