@@ -1,5 +1,6 @@
 const { c } = require("tar");
 const knex = require("../db/connection");
+const mapProperties = require("../utils/map-properties");
 const reduceProperties = require("../utils/reduce-properties");
 
 const reduceCritic = reduceProperties("review_id", {
@@ -21,7 +22,13 @@ function list(movieId) {
     .join("critics as c", "c.critic_id", "r.critic_id")
     .select("r.*", "c.*")
     .where("r.movie_id", movieId)
-    .then((data) => reduceCritic(data))
+    .then(reduceCritic)
+    .then((reviews) => {
+      return reviews.map((review) => {
+        review.critic = review.critic[0]
+        return review;
+      })
+    })
 }
 
 function read(review_id) {
