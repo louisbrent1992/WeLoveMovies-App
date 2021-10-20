@@ -15,12 +15,13 @@ function create(review) {
     .then((createdRecords) => createdRecords[0]);
 }
 
-function list() {
+function list(movieId) {
   return knex("reviews as r")
     .join("movies as m", "r.movie_id", "m.movie_id")
     .join("critics as c", "c.critic_id", "r.critic_id")
     .select("r.*", "c.*")
-    .then((data) => reduceCritic(data));
+    .where("r.movie_id", movieId)
+    .then((data) => reduceCritic(data))
 }
 
 function read(review_id) {

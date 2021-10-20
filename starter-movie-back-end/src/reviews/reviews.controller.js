@@ -14,7 +14,8 @@ async function reviewExists(req, res, next) {
 }
 
 async function list(req, res) {
-    const data = await reviewsService.list();
+    const { movieId } = req.params;
+    const data = await reviewsService.list(movieId);
     console.log(data);
     res.json({ data });
 }
