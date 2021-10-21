@@ -3,9 +3,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const moviesRouter = require("./movies/movies.router");
-const reviewsRouter = require("./reviews/reviews.router");
-const theatersRouter = require("./theaters/theaters.router");
+const theatersRouter = require("./Components/theaters/theaters.router");
+const reviewsRouter = require("./Components/reviews/reviews.router");
+const moviesRouter = require("./Components/movies/movies.router");
 
 const notFound = require("./errors/notFound");
 const errorHandler = require("./errors/errorHandler");
