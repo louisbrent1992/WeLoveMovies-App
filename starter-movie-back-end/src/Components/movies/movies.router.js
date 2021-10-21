@@ -8,6 +8,7 @@ router.route("/").get(controller.list).all(methodNotAllowed);
 
 router.route("/:movieId").get(controller.read).all(methodNotAllowed);
 
+// When using merged routes, use router.use.
 router.use("/:movieId/reviews", controller.movieExists, reviewsRouter);
 
 router.use("/:movieId/theaters", controller.movieExists, theatersRouter);
