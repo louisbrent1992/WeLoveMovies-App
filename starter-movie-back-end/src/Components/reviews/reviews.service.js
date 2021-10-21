@@ -1,7 +1,6 @@
 const { c } = require("tar");
-const knex = require("../db/connection");
-const mapProperties = require("../utils/map-properties");
-const reduceProperties = require("../utils/reduce-properties");
+const knex = require("../../db/connection");
+const reduceProperties = require("../../utils/reduce-properties");
 
 const reduceCritic = reduceProperties("review_id", {
   preferred_name: ["critic", null, "preferred_name"],
