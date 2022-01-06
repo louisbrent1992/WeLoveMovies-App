@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/louisbrent1992/welovemovies-app">
-    <img src="public/WeLoveMovies.png" alt="Logo" width="80" height="80">
+    <img src="./Public/WeLoveMovies.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">WeLoveMovies</h3>
@@ -83,8 +83,6 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `welovemovies-app`, `louisbrent1992`, `WeLoveMovies`, `Find your next favorite movie by using our WeLoveMovies`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
