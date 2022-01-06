@@ -82,7 +82,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![WeLoveMovies-App Screen Shot][product-screenshot]](https://example.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -220,4 +220,4 @@ Project Link: [https://github.com/louisbrent1992/welovemovies-app](https://githu
 [license-url]: https://github.com/louisbrent1992/welovemovies-app/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/louis-brent
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: ./Public/screen1.jpg
