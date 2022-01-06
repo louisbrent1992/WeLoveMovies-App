@@ -83,6 +83,8 @@
 ## About The Project
 
 [![WeLoveMovies-App Screen Shot][product-screenshot]](https://example.com)
+<br>
+[![WeLoveMovies-App Screen Shot 2][product-screenshot 2]](https://example.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -221,3 +223,4 @@ Project Link: [https://github.com/louisbrent1992/welovemovies-app](https://githu
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/louis-brent
 [product-screenshot]: ./Public/screen1.jpg
+[product-screenshot 2]: ./Public/theatreslistscreen1.jpg
