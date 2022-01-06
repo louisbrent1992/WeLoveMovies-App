@@ -36,7 +36,7 @@
 <h3 align="center">WeLoveMovies</h3>
 
   <p align="center">
-    Find your next favorite movie by using the WeLoveMovies database. In this database you will find local movies shown in theatres nearby, also reviews from fans and critics. The WeLoveMovies app is designed for movie lovers to find exactly what they are looking for without hassle of unnecessary research. Our app is designed to do all of that in one place, for you. Enjoy.          
+    Find your next favorite movie by using the WeLoveMovies database. In this database you will find local movies shown in theatres nearby, also reviews from fans and critics. The WeLoveMovies app is designed for movie lovers to find exactly what they are craving to watch, without any of the hassle. Our app is designed with the movie lover in mind. Enjoy.          
     <br />
     <a href="https://github.com/louisbrent1992/welovemovies-app"><strong>Explore the docs »</strong></a>
     <br />
@@ -103,16 +103,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Please follow installation instructions below.
 
 ### Installation
 
