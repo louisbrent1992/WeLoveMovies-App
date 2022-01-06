@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/louisbrent1992/welovemovies-app">
-    <img src="./Public/WeLoveMovies.png" alt="Logo" width="80" height="80">
+    <img src="./Public/WeLoveMovies.png" alt="Logo" width="200" height="200">
   </a>
 
 <h3 align="center">WeLoveMovies</h3>
