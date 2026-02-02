@@ -1,24 +1,42 @@
-if (process.env.USER) require("dotenv").config();
+require("dotenv").config();
 const express = require("express");
-const app = express();
 const cors = require("cors");
+const morgan = require("morgan");
 
-const theatersRouter = require("./Components/theaters/theaters.router");
-const reviewsRouter = require("./Components/reviews/reviews.router");
-const moviesRouter = require("./Components/movies/movies.router");
+const moviesRouter = require("./routes/movies");
+const theatersRouter = require("./routes/theaters");
+const reviewsRouter = require("./routes/reviews");
+const searchRouter = require("./routes/search");
 
-const notFound = require("./errors/notFound");
-const errorHandler = require("./errors/errorHandler");
+const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+app.use(morgan("dev"));
 
+// Health check endpoint
+app.get("/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// Routes
+app.use("/movies", moviesRouter);
 app.use("/theaters", theatersRouter);
 app.use("/reviews", reviewsRouter);
-app.use("/movies", moviesRouter);
+app.use("/search", searchRouter);
 
-app.use(notFound);
+// 404 handler
+app.use((req, res, next) => {
+    res.status(404).json({ error: `Not found: ${req.originalUrl}` });
+});
 
-app.use(errorHandler);
+// Error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    const status = err.status || 500;
+    const message = err.message || "Something went wrong!";
+    res.status(status).json({ error: message });
+});
 
 module.exports = app;

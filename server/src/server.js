@@ -1,16 +1,18 @@
-const path = require("path");
-require("dotenv").config();
-const { PORT = 5000 } = process.env;
-
 const app = require("./app");
-const knex = require("./db/connection");
 
-const listener = () => console.log(`Listening on Port ${PORT}!`);
+const PORT = process.env.PORT || 5001;
 
-knex.migrate
-  .latest()
-  .then((migrations) => {
-    console.log("migrations", migrations);
-    app.listen(PORT, listener);
-  })
-  .catch(console.error);
+const listener = app.listen(PORT, () => {
+  console.log(`🎬 WeLoveMovies API Server`);
+  console.log(`📡 Listening on port ${PORT}`);
+  console.log(`🔗 http://localhost:${PORT}`);
+  console.log(`✅ Connected to TMDB API`);
+});
+
+// Graceful shutdown
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received. Shutting down gracefully...");
+  listener.close(() => {
+    console.log("Process terminated");
+  });
+});
