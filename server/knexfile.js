@@ -8,8 +8,13 @@ const {
 
 module.exports = {
   development: {
-    client: "postgresql",
-    connection: DATABASE_URL,
+    client: DATABASE_URL ? "postgresql" : "sqlite3",
+    connection: DATABASE_URL
+      ? DATABASE_URL
+      : {
+          filename: path.join(__dirname, "dev.sqlite3"),
+        },
+    useNullAsDefault: true,
     pool: { min: 0, max: 5 },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),

@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-    "i": "^0.3.7"
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   },
-  "devDependencies": {},
   "scripts": {
+    "start": "concurrently \"cd starter-movie-back-end && npm start\" \"cd starter-movie-front-end && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
