@@ -56,7 +56,7 @@ function populateTheaters(signal) {
  * Get now playing movies
  */
 export async function listMovies(signal) {
-  const url = new URL(`${API_BASE_URL}/movies?is_showing=true`);
+  const url = new URL(`${API_BASE_URL}/movies?is_showing=true`, window.location.origin);
   return await fetchJson(url, { headers, signal }, []);
 }
 
@@ -64,7 +64,7 @@ export async function listMovies(signal) {
  * Get all streaming providers
  */
 export async function listTheaters(signal) {
-  const url = new URL(`${API_BASE_URL}/theaters`);
+  const url = new URL(`${API_BASE_URL}/theaters`, window.location.origin);
   return await fetchJson(url, { headers, signal }, []);
 }
 
@@ -72,7 +72,7 @@ export async function listTheaters(signal) {
  * Get a single movie with reviews and theaters
  */
 export async function readMovie(movieId, signal) {
-  const url = new URL(`${API_BASE_URL}/movies/${movieId}`);
+  const url = new URL(`${API_BASE_URL}/movies/${movieId}`, window.location.origin);
   const addReviews = populateReviews(signal);
   const addTheaters = populateTheaters(signal);
   return await fetchJson(url, { headers, signal }, [])
@@ -84,7 +84,7 @@ export async function readMovie(movieId, signal) {
  * Search movies by query
  */
 export async function searchMovies(query, signal) {
-  const url = new URL(`${API_BASE_URL}/search`);
+  const url = new URL(`${API_BASE_URL}/search`, window.location.origin);
   url.searchParams.append("query", query);
   return await fetchJson(url, { headers, signal }, []);
 }
@@ -93,7 +93,7 @@ export async function searchMovies(query, signal) {
  * Get movie genres
  */
 export async function listGenres(signal) {
-  const url = new URL(`${API_BASE_URL}/search/genres`);
+  const url = new URL(`${API_BASE_URL}/search/genres`, window.location.origin);
   return await fetchJson(url, { headers, signal }, []);
 }
 
@@ -101,7 +101,7 @@ export async function listGenres(signal) {
  * Get movies by genre
  */
 export async function listMoviesByGenre(genreId, signal) {
-  const url = new URL(`${API_BASE_URL}/search/genre/${genreId}`);
+  const url = new URL(`${API_BASE_URL}/search/genre/${genreId}`, window.location.origin);
   return await fetchJson(url, { headers, signal }, []);
 }
 
