@@ -1,26 +1,11 @@
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+  process.env.REACT_APP_API_BASE_URL || "http://localhost:5001";
 
-/**
- * Defines the default headers for these functions to work with `json-server`
- */
 const headers = new Headers();
 headers.append("Content-Type", "application/json");
 
 /**
- * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s
- *
- * This function is NOT exported because it is not needed outside of this file.
- *
- * @param url
- *  the url for the requst.
- * @param options
- *  any options for fetch
- * @param onCancel
- *  value to return if fetch call is aborted. Default value is undefined.
- * @returns {Promise<Error|any>}
- *  a promise that resolves to the `json` data or an error.
- *  If the response is not in the 200 - 399 range the promise is rejected.
+ * Fetch JSON from the specified URL and handle errors
  */
 async function fetchJson(url, options, onCancel) {
   try {
@@ -45,6 +30,9 @@ async function fetchJson(url, options, onCancel) {
   }
 }
 
+/**
+ * Populate movie reviews
+ */
 function populateReviews(signal) {
   return async (movie) => {
     const url = `${API_BASE_URL}/movies/${movie.movie_id}/reviews`;
@@ -53,6 +41,9 @@ function populateReviews(signal) {
   };
 }
 
+/**
+ * Populate movie theaters/providers
+ */
 function populateTheaters(signal) {
   return async (movie) => {
     const url = `${API_BASE_URL}/movies/${movie.movie_id}/theaters`;
@@ -62,22 +53,15 @@ function populateTheaters(signal) {
 }
 
 /**
- * Retrieves all existing movies and populates the `reviews` property
- * @returns {Promise<[movie]>}
- *  a promise that resolves to a possibly empty array of movies saved in the database.
+ * Get now playing movies
  */
 export async function listMovies(signal) {
   const url = new URL(`${API_BASE_URL}/movies?is_showing=true`);
-  const addReviews = populateReviews(signal);
-  return await fetchJson(url, { headers, signal }, []).then((movies) =>
-    Promise.all(movies.map(addReviews))
-  );
+  return await fetchJson(url, { headers, signal }, []);
 }
 
 /**
- * Retrieves all existing theaters
- * @returns {Promise<[theater]>}
- *  a promise that resolves to a possibly empty array of theaters saved in the database.
+ * Get all streaming providers
  */
 export async function listTheaters(signal) {
   const url = new URL(`${API_BASE_URL}/theaters`);
@@ -85,9 +69,7 @@ export async function listTheaters(signal) {
 }
 
 /**
- * Retrieves all existing movies and populates the `reviews` property
- * @returns {Promise<[movie]>}
- *  a promise that resolves to a possibly empty array of movies saved in the database.
+ * Get a single movie with reviews and theaters
  */
 export async function readMovie(movieId, signal) {
   const url = new URL(`${API_BASE_URL}/movies/${movieId}`);
@@ -98,11 +80,42 @@ export async function readMovie(movieId, signal) {
     .then(addTheaters);
 }
 
+/**
+ * Search movies by query
+ */
+export async function searchMovies(query, signal) {
+  const url = new URL(`${API_BASE_URL}/search`);
+  url.searchParams.append("query", query);
+  return await fetchJson(url, { headers, signal }, []);
+}
+
+/**
+ * Get movie genres
+ */
+export async function listGenres(signal) {
+  const url = new URL(`${API_BASE_URL}/search/genres`);
+  return await fetchJson(url, { headers, signal }, []);
+}
+
+/**
+ * Get movies by genre
+ */
+export async function listMoviesByGenre(genreId, signal) {
+  const url = new URL(`${API_BASE_URL}/search/genre/${genreId}`);
+  return await fetchJson(url, { headers, signal }, []);
+}
+
+/**
+ * Delete a review (not supported with TMDB)
+ */
 export async function deleteReview(reviewId) {
   const url = `${API_BASE_URL}/reviews/${reviewId}`;
   return await fetchJson(url, { method: "DELETE", headers }, {});
 }
 
+/**
+ * Update a review (not supported with TMDB)
+ */
 export async function updateReview(reviewId, data) {
   const url = `${API_BASE_URL}/reviews/${reviewId}`;
   const options = {
