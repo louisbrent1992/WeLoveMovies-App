@@ -1,23 +1,13 @@
 {
-  "name": "project_welovemovies_1",
+  "name": "we-love-movies-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "devDependencies": {
-    "concurrently": "^9.2.1"
-  },
+  "private": true,
   "scripts": {
-    "start": "concurrently \"cd starter-movie-back-end && npm start\" \"cd starter-movie-front-end && npm start\"",
+    "start": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/louisbrent1992/WeLoveMovies-App.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/louisbrent1992/WeLoveMovies-App/issues"
-  },
-  "homepage": "https://github.com/louisbrent1992/WeLoveMovies-App#readme"
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
 }
